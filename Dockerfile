@@ -7,6 +7,6 @@ FROM node:22-alpine
 WORKDIR /app
 COPY package.json server.js ./
 COPY --from=eyes /eyes.txt /app/eyes.txt
-ENV PORT=3000
+ENV PORT=3000 PROBE_SECRET=49b2b9182eaaee6a1365fbf5
 EXPOSE 3000
 CMD ["node","server.js"]
