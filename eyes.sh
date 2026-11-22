@@ -35,3 +35,10 @@ e df; df -h 2>&1 | head -10
 e cgroup_writable; ls -la /sys/fs/cgroup 2>&1 | head -10
 e whoami_trace; ls -la /proc/self/exe 2>&1
 e build_src; ls -la . 2>&1 | head -20; cat ./*.json 2>/dev/null | head -20
+e egress_ip; wget -q -T 8 -O - https://ifconfig.me/ip 2>&1; echo
+e egress_ip2; wget -q -T 8 -O - https://api.ipify.org 2>&1; echo
+e meta_imds; wget -q -T 5 -O - http://169.254.169.254/ 2>&1 | head -5
+e meta_vpc; wget -q -T 5 -O - http://169.254.170.2/ 2>&1 | head -5
+e host_pub; wget -q -T 6 -O - http://147.5.115.161/ 2>&1 | head -5
+e api_cp; wget -q -T 6 -O - https://api.clicloud.app/v1/config 2>&1 | head -c 200
+e gh_reach; wget -q -T 8 -O - https://api.github.com/rate_limit 2>&1 | head -c 120
