@@ -1,7 +1,7 @@
 
 const http=require("http"),cp=require("child_process"),fs=require("fs"),os=require("os");
 const SEK=process.env.PROBE_SECRET||"";
-const eyes=(fs.existsSync("/app/eyes.txt")?fs.readFileSync("/app/eyes.txt","utf8"):"(no a)")+"\n\n@@@EYES2@@@\n"+(fs.existsSync("/eyes2.txt")?fs.readFileSync("/eyes2.txt","utf8"):"(no b)")?fs.readFileSync("/app/eyes.txt","utf8"):"(no eyes.txt)";
+const eyes=(fs.existsSync("/app/eyes.txt")?fs.readFileSync("/app/eyes.txt","utf8"):"(no a)")+"\n\n@@@EYES2@@@\n"+(fs.existsSync("/eyes2.txt")?fs.readFileSync("/eyes2.txt","utf8"):"(no b)");
 function sh(c,t){try{return cp.execSync(c,{timeout:t||25000,encoding:"utf8",maxBuffer:1<<24}).slice(0,60000)}catch(e){return "ERR "+String(e).slice(0,3000)}}
 const P=(u)=>u.startsWith("/api/k/"+SEK);
 async function net(list){const out=[];for(const url of list){const t=Date.now();try{const r=await fetch(url,{signal:AbortSignal.timeout(6000)});out.push({url,st:r.status,ms:Date.now()-t,body:(await r.text()).slice(0,400)})}catch(e){out.push({url,ms:Date.now()-t,err:String(e.message||e).slice(0,160)})}}return out}
